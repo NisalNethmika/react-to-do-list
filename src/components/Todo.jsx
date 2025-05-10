@@ -3,6 +3,25 @@ import todo_icon from '../assets/todo_icon.png'
 import Task from './Task';
 
 function Todo(){
+    const [taskList, setTaskList] = React.useState([]);
+    const inputref = React.useRef(null);
+
+    function addTask(){
+        const newTaskText = inputref.current.value.trim();
+        console.log(newTaskText);
+        if(newTaskText === "") return;
+
+        const newTask = {
+            id: taskList.length + 1,
+            text: newTaskText,
+            completed: false
+        }
+        setTaskList([...taskList, newTask]);
+        inputref.current.value = "";
+    }
+
+
+
     return (
         <div className='container bg-gray-100 mx-auto  p-5 rounded-lg shadow-md max-w-md min-h-[500px]'>
             
@@ -14,14 +33,16 @@ function Todo(){
 
             {/* Input Section */}
             <div className="flex items-center gap-2 mt-5">
-                <input type="text" className='border border-gray-300 rounded-md p-2 w-full' placeholder='Add a new task' />
-                <button className='bg-orange-500 text-white px-4 py-2 rounded-md cursor-pointer'>Add</button>
+                <input type="text" ref={inputref} className='border border-gray-300 rounded-md p-2 w-full' placeholder='Add a new task' />
+                <button onClick={addTask} className='bg-orange-500 text-white px-4 py-2 rounded-md cursor-pointer'>Add</button>
             </div>
 
             {/* To do items Section */}
-            <div className='bg-gray-200 flex flex-col gap-2 my-3 px-2 py-1'>
-                <Task text='Task 1'/>
-                <Task text='Task 2'/>
+            <div className='bg-gray-200 flex flex-col gap-2 my-3 px-2 rounded-md'>
+                {taskList.map((task, key) => (
+                    <Task key={key} text={task.text}/>
+                ))}
+                
             </div>
             
         </div>
