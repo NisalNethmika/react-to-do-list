@@ -1,0 +1,31 @@
+import React from 'react'
+import todo_icon from '../assets/todo_icon.png'
+import Task from './Task';
+
+function Todo(){
+    return (
+        <div className='container bg-gray-100 mx-auto  p-5 rounded-lg shadow-md max-w-md min-h-[500px]'>
+            
+            {/* Header Section */}
+            <div className="flex items-center gap-2" >
+                <img className='w-8' src={todo_icon} alt="" />
+                <h1 className='text-2xl font-semibold'>To Do List</h1>
+            </div>
+
+            {/* Input Section */}
+            <div className="flex items-center gap-2 mt-5">
+                <input type="text" className='border border-gray-300 rounded-md p-2 w-full' placeholder='Add a new task' />
+                <button className='bg-orange-500 text-white px-4 py-2 rounded-md cursor-pointer'>Add</button>
+            </div>
+
+            {/* To do items Section */}
+            <div className='bg-gray-200 flex flex-col gap-2 my-3 px-2 py-1'>
+                <Task text='Task 1'/>
+                <Task text='Task 2'/>
+            </div>
+            
+        </div>
+      )
+}
+
+export default Todo;
