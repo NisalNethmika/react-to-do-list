@@ -5,11 +5,10 @@ import delete_icon from '../assets/deleteicon.png'
 
 function Task(props) {
   return (
-    <div className="listItem flex justify-between w-full items-center px-2 py-1">
-        <div className='flex items-center'>
+    <div  className="listItem flex justify-between w-full items-center px-2 py-1 ">
+        <div onClick={()=>(props.toggleFunction(props.id))} className='flex items-center cursor-pointer'>
             <img 
               src={props.completed ? check_mark : uncheck_mark} 
-              onClick={()=>(props.toggleFunction(props.id))} 
               className='w-5 cursor-pointer'  
             />
             <p className={`ml-4 text-[17px] ${props.completed ? 'line-through text-gray-500' : ''}`}>
