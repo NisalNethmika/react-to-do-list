@@ -20,7 +20,20 @@ function Todo(){
         inputref.current.value = "";
     }
 
+    function deleteTask(id){
+        const newTaskList = taskList.filter(prevTask => prevTask.id !== id);
+        setTaskList(newTaskList);   
+    }
 
+    function toggleTask(id){
+        const newTaskList = taskList.map(task => {
+            if(task.id === id){
+                task.completed = !task.completed;
+            }
+            return task;
+        });
+        setTaskList(newTaskList);
+    }
 
     return (
         <div className='container bg-gray-100 mx-auto  p-5 rounded-lg shadow-md max-w-md min-h-[500px]'>
@@ -39,8 +52,8 @@ function Todo(){
 
             {/* To do items Section */}
             <div className='bg-gray-200 flex flex-col gap-2 my-3 px-2 rounded-md'>
-                {taskList.map((task, key) => (
-                    <Task key={key} text={task.text}/>
+                {taskList.map((task) => (
+                    <Task key={task.id} id={task.id} text={task.text} completed={task.completed} deleteFunction={deleteTask} toggleFunction={toggleTask}/>
                 ))}
                 
             </div>
